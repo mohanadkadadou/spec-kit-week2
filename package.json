@@ -1,0 +1,10 @@
+{
+  "name": "spec-kit-week2",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Quote of the day page built with spec-driven development (Spec Kit)",
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}
