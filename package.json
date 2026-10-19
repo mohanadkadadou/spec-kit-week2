@@ -5,6 +5,6 @@
   "type": "module",
   "description": "Quote of the day page built with spec-driven development (Spec Kit)",
   "scripts": {
-    "test": "node --test tests/"
+    "test": "node --test"
   }
 }
