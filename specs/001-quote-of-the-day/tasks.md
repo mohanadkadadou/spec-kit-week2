@@ -24,10 +24,10 @@
 - [x] T010 [US3] Load favorites on start, save on toggle, ignore unknown ids (FR-006, FR-007)
 
 ## Phase 6: Polish
-- [ ] T011 [P] Verify keyboard-only use and offline use (SC-003, SC-004)
-- [ ] T012 [P] Run `npm test` and the quickstart manual check
+- [x] T011 [P] Verify keyboard-only use and offline use (SC-003, SC-004)
+- [x] T012 [P] Run `npm test` and the quickstart manual check
 
 ## Phase 7: Convergence
-- [ ] T013 Make "New quote" always show a different quote than the one displayed, via a `pickDifferent(list, currentIndex)` helper with tests, per US1/AC2 and Independent Test (partial)
-- [ ] T014 Give each quote a stable string `id` and store favorite ids (not array indices) in storage, migrating nothing but dropping unknown ids, per Key Entity "Quote: stable identity" and FR-006 (contradicts)
-- [ ] T015 Verify keyboard-only and offline use in a real browser and record the result in quickstart.md, per SC-003, SC-004 (missing)
+- [x] T013 Make "New quote" always show a different quote than the one displayed, via a `pickDifferent(list, currentIndex)` helper with tests, per US1/AC2 and Independent Test (partial)
+- [x] T014 Give each quote a stable string `id` and store favorite ids (not array indices) in storage, migrating nothing but dropping unknown ids, per Key Entity "Quote: stable identity" and FR-006 (contradicts)
+- [x] T015 Verify keyboard-only and offline use in a real browser and record the result in quickstart.md, per SC-003, SC-004 (missing)

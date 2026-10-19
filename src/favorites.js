@@ -1,12 +1,13 @@
-/** Favorites persistence. Favorites are stored as quote indices. All storage access is guarded. */
+/** Favorites persistence. Favorites are stored as stable quote ids. All storage access is guarded. */
 export const STORAGE_KEY = "quote-of-the-day:favorites";
 
-/** Load favorites as a Set of valid indices; never throws. */
-export function loadFavorites(storage, quoteCount) {
+/** Load favorites as a Set of known quote ids; never throws. */
+export function loadFavorites(storage, knownIds) {
   try {
     const parsed = JSON.parse(storage.getItem(STORAGE_KEY));
     if (!Array.isArray(parsed)) return new Set();
-    return new Set(parsed.filter((n) => Number.isInteger(n) && n >= 0 && n < quoteCount));
+    const known = new Set(knownIds);
+    return new Set(parsed.filter((id) => typeof id === "string" && known.has(id)));
   } catch {
     return new Set();
   }
@@ -22,10 +23,10 @@ export function saveFavorites(storage, favorites) {
   }
 }
 
-/** Return a new Set with `index` added if absent, removed if present. */
-export function toggleFavorite(favorites, index) {
+/** Return a new Set with `id` added if absent, removed if present. */
+export function toggleFavorite(favorites, id) {
   const next = new Set(favorites);
-  if (next.has(index)) next.delete(index);
-  else next.add(index);
+  if (next.has(id)) next.delete(id);
+  else next.add(id);
   return next;
 }
