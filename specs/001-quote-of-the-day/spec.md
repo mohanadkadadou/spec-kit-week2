@@ -2,7 +2,7 @@
 
 **Feature Branch**: `001-quote-of-the-day`
 **Created**: 2026-10-19
-**Status**: Draft
+**Status**: Draft (v2, refined after converge pass 1)
 **Input**: User description: "A quote-of-the-day page: one random quote from a built-in list, a "New quote" button, and favoriting that persists across reloads."
 
 ## User Scenarios & Testing *(mandatory)*
@@ -20,7 +20,7 @@ several times and confirm the displayed quote changes over time.
 **Acceptance Scenarios**:
 
 1. **Given** the page is opened, **When** it finishes loading, **Then** exactly one quote with its author is displayed.
-2. **Given** a quote is displayed, **When** the visitor presses "New quote", **Then** a quote from the built-in list is displayed.
+2. **Given** a quote is displayed, **When** the visitor presses "New quote", **Then** a different quote from the built-in list is displayed (never the same quote twice in a row).
 
 ---
 
@@ -63,6 +63,7 @@ previously favorited quotes are still marked as favorites.
 
 - Saved favorites cannot be read or written (storage blocked, corrupted data): the page MUST still display quotes and not crash.
 - A saved favorite refers to a quote that no longer exists in the list: it MUST be ignored silently.
+- The list is reordered or a quote is added: existing favorites MUST still match the quotes the visitor chose.
 - The visitor presses "New quote" many times quickly: the page MUST stay responsive and always show exactly one quote.
 
 ## Requirements *(mandatory)*
@@ -71,16 +72,16 @@ previously favorited quotes are still marked as favorites.
 
 - **FR-001**: The page MUST show one quote (text and author) chosen at random from a built-in list when it loads.
 - **FR-002**: The built-in list MUST contain at least 10 quotes.
-- **FR-003**: The page MUST provide a "New quote" button that replaces the displayed quote with a randomly chosen one.
+- **FR-003**: The page MUST provide a "New quote" button that replaces the displayed quote with a randomly chosen one that is different from the quote currently displayed.
 - **FR-004**: The visitor MUST be able to mark and un-mark the displayed quote as a favorite with one control.
 - **FR-005**: The favorite control MUST show, visually and to assistive technology, whether the displayed quote is a favorite.
-- **FR-006**: Favorites MUST persist across page reloads on the same device and browser.
+- **FR-006**: Favorites MUST persist across page reloads on the same device and browser, and MUST keep pointing at the same quote even if the built-in list is later reordered or extended.
 - **FR-007**: The page MUST keep working, with no favorites, if saved data is unavailable or corrupted.
 - **FR-008**: The page MUST work without any server or network connection.
 
 ### Key Entities
 
-- **Quote**: a piece of text with an author and a stable identity.
+- **Quote**: a piece of text with an author and a stable identity that never changes when the list is reordered or extended.
 - **Favorite**: the set of quotes the visitor has marked, remembered between visits.
 
 ## Success Criteria *(mandatory)*

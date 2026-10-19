@@ -54,7 +54,7 @@ index.html
 styles.css
 src/
 ├── quotes.js        # QUOTES data array
-├── selection.js     # pickRandom(list)
+├── selection.js     # pickRandom(list), pickDifferent(list, currentIndex)
 ├── favorites.js     # load/save/toggle favorites against a storage adapter
 └── main.js          # DOM wiring
 tests/
@@ -67,7 +67,7 @@ package.json         # only a "test" script, no dependencies
 
 ## Design Decisions
 
-- **Random selection**: `pickRandom(list)` returns `list[Math.floor(random() * list.length)]`; `random` is injectable for tests.
-- **Favorite identity**: favorites are stored as the quote's **array index** in `QUOTES` (compact and simple).
+- **Random selection**: `pickDifferent(list, currentIndex, random)` draws from the list excluding the current index (draw an index in `[0, n-1)` and skip over `currentIndex`), so a repeat is impossible and the distribution over the other quotes stays uniform. `pickRandom` remains for the first quote on load. `random` is injectable for tests.
+- **Favorite identity**: every quote has a stable string `id` (e.g. `"knuth-premature-optimization"`); favorites are stored as ids, never array indices, so reordering or inserting quotes cannot re-assign a favorite to the wrong quote. Unknown ids are dropped on load.
 - **Rendering**: `main.js` renders the quote, author, and sets `aria-pressed` on the favorite button.
 - **Corruption handling**: invalid JSON or non-array value resets to an empty list.
